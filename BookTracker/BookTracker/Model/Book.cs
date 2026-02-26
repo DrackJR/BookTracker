@@ -8,6 +8,6 @@
         public Genre Genre { get; set; }
         public string? Notes {  get; set; }
         public DateTime AddDateTime {  get; set; }
-        public enum Status {Прочитано, Читаю, В_планах, Отложено }
+        public BookStatus Status { get; set; }
     }
 }
