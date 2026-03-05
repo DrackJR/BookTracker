@@ -15,6 +15,9 @@
             <th>Автор</th>
             <th>Год</th>
             <th>Жанр</th>
+            <th>Заметки</th>
+            <th>Дата добавления</th>
+            <th>Статус</th>
             <th></th>
         </tr>
     </thead>
@@ -26,6 +29,9 @@
                 <td>@book.Author</td>
                 <td>@book.Year</td>
                 <td>@book.Genre</td>
+                <td>@book.Notes</td>
+                <td>@book.AddDateTime.ToString()</td>
+                <td>@book.Status</td> 
                 <td>
                     <a asp-page="Details" asp-route-id="@book.Id">Открыть</a>
                     <a asp-page="Edit" asp-route-id="@book.Id">Изменить</a>

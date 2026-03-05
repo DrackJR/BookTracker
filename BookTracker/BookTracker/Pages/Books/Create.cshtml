@@ -22,7 +22,7 @@
 	</div>
 
 	<div>
-		<label>Количество</label><br />
+		<label>Жанр</label><br />
 		<input asp-for="Book.Genre" />
 	</div>
 
@@ -39,6 +39,11 @@
 	<div>
 		<label>Статус</label><br />
 		<select asp-for="Book.Status" asp-items="Html.GetEnumSelectList<BookStatus>()"></select>
+	</div>
+
+	<div>
+		<p>
+		</p>
 	</div>
 
 	<button type="submit">Сохранить</button>
