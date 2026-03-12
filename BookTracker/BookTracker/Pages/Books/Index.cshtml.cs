@@ -2,6 +2,7 @@ using BookTracker.Data;
 using BookTracker.Model;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.EntityFrameworkCore;
 
 namespace BookTracker.Pages.Books
 {
@@ -17,7 +18,10 @@ namespace BookTracker.Pages.Books
 
         public void OnGet()
         {
-            Books = _context.Books.ToList();
+            Books = _context.Books
+                .Include(s => s.Author)
+                .Include(s => s.Genre)
+                .ToList();
         }
     }
 }

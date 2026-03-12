@@ -2,10 +2,10 @@
 {
     public class Book : EFModel
     {
-        public string? Title { get; set; }
-        public Author Author { get; set; }
+        public string Title { get; set; }
+        public Author Author { get; set; } = new Author();
         public int Year { get; set; }
-        public Genre Genre { get; set; }
+        public Genre Genre { get; set; } = new Genre();
         public string? Notes {  get; set; }
         public DateTime AddDateTime {  get; set; }
         public BookStatus Status { get; set; }

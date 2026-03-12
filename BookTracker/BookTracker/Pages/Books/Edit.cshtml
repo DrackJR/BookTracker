@@ -16,7 +16,7 @@
 
     <div>
         <label>Автор</label><br />
-        <input asp-for="Book.Author" />
+        <input asp-for="Book.Author.Name" />
     </div>
 
     <div>
@@ -25,8 +25,8 @@
     </div>
 
     <div>
-        <label>Количество</label><br />
-        <input asp-for="Book.Genre" type="number" />
+        <label>Жанр</label><br />
+        <input asp-for="Book.Genre.Name" />
     </div>
     <div>
         <label>Заметки</label><br />

@@ -7,13 +7,13 @@
 <form method="post">
 	<div>
 		<label>Название</label><br />
-		<input asp-for="Book.Name" />
-		<span asp-validation-for="Book.Name"></span>
+		<input asp-for="Book.Title" />
+		<span asp-validation-for="Book.Title"></span>
 	</div>
 
 	<div>
 		<label>Автор</label><br />
-		<input asp-for="Book.Author" />
+		<input asp-for="Book.Author.Name" />
 	</div>
 
 	<div>
@@ -23,7 +23,7 @@
 
 	<div>
 		<label>Жанр</label><br />
-		<input asp-for="Book.Genre" />
+		<input asp-for="Book.Genre.Name" />
 	</div>
 
 	<div>
