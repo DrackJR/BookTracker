@@ -1,0 +1,19 @@
+﻿@page
+@model BookTracker.Pages.Books.DetailsModel
+@{
+}
+<h1>Информация о книге</h1>
+
+<div>
+    <p><strong>Название:</strong> @Model.Book.Title</p>
+    <p><strong>Автор:</strong> @Model.Book.Author.Name</p>
+    <p><strong>Год:</strong> @Model.Book.Year</p>
+    <p><strong>:Жанр:</strong> @Model.Book.Genre.Name</p>
+    <p><strong>:Заметки:</strong> @Model.Book.Notes</p>
+    <p><strong>:Дата добавления:</strong> @Model.Book.AddDateTime</p>
+    <p><strong>:Статус:</strong> @Model.Book.Status</p>
+</div>
+
+<p>
+    <a asp-page="Index">Назад к списку</a>
+</p>

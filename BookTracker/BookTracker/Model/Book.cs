@@ -2,12 +2,12 @@
 {
     public class Book : EFModel
     {
-        public string? Title { get; set; }
-        public Author Author { get; set; }
+        public string Title { get; set; }
+        public Author Author { get; set; } = new Author();
         public int Year { get; set; }
-        public Genre Genre { get; set; }
+        public Genre Genre { get; set; } = new Genre();
         public string? Notes {  get; set; }
         public DateTime AddDateTime {  get; set; }
-        public enum Status {Прочитано, Читаю, В_планах, Отложено }
+        public BookStatus Status { get; set; }
     }
 }

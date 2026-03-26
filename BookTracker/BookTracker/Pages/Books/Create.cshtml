@@ -1,0 +1,52 @@
+﻿@page
+@using BookTracker.Model
+@model BookTracker.Pages.Books.CreateModel
+@{
+}
+<h1>Добавить книгу</h1>
+<form method="post">
+	<div>
+		<label>Название</label><br />
+		<input asp-for="Book.Title" />
+		<span asp-validation-for="Book.Title"></span>
+	</div>
+
+	<div>
+		<label>Автор</label><br />
+		<input asp-for="Book.Author.Name" />
+	</div>
+
+	<div>
+		<label>Год</label><br />
+		<input asp-for="Book.Year" type="number" />
+	</div>
+
+	<div>
+		<label>Жанр</label><br />
+		<input asp-for="Book.Genre.Name" />
+	</div>
+
+	<div>
+		<label>Заметки</label><br />
+		<input asp-for="Book.Notes" type="text" />
+	</div>
+
+	<div>
+		<label>Дата добавления</label><br />
+		<input asp-for="Book.AddDateTime" type="datetime" />
+	</div>
+
+	<div>
+		<label>Статус</label><br />
+		<select asp-for="Book.Status" asp-items="Html.GetEnumSelectList<BookStatus>()"></select>
+	</div>
+
+	<div>
+		<p>
+		</p>
+	</div>
+
+	<button type="submit">Сохранить</button>
+</form>
+
+<a asp-page="Index">Назад</a>
