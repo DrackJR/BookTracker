@@ -1,0 +1,18 @@
+﻿using BookTracker.Model;
+using Microsoft.EntityFrameworkCore;
+
+namespace BookTracker.Data
+{
+    public class ApplicationDbContext : DbContext
+    {
+        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
+        : base(options)
+        {
+            //Database.Migrate();
+        }
+
+        public DbSet<Book> Books { get; set; }
+        public DbSet<Author> Authors { get; set; }
+        public DbSet<Genre> Genres { get; set; }
+    }
+}
