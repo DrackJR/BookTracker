@@ -2,51 +2,72 @@
 @using BookTracker.Model
 @model BookTracker.Pages.Books.CreateModel
 @{
+    ViewData["Title"] = "Добавить книгу";
 }
-<h1>Добавить книгу</h1>
-<form method="post">
-	<div>
-		<label>Название</label><br />
-		<input asp-for="Book.Title" />
-		<span asp-validation-for="Book.Title"></span>
-	</div>
 
-	<div>
-		<label>Автор</label><br />
-		<input asp-for="Book.Author.Name" />
-	</div>
+<div class="container mt-4">
+    <div class="row justify-content-center">
+        <div class="col-lg-6">
+            <div class="card shadow-sm">
+                <div class="card-header bg-primary text-white">
+                    <h4 class="mb-0">Добавить книгу</h4>
+                </div>
+                <div class="card-body">
+                    <form method="post">
+                        <div class="mb-3">
+                            <label asp-for="Book.Title" class="form-label">Название</label>
+                            <input asp-for="Book.Title" class="form-control" />
+                            <span asp-validation-for="Book.Title" class="text-danger"></span>
+                        </div>
 
-	<div>
-		<label>Год</label><br />
-		<input asp-for="Book.Year" type="number" />
-	</div>
+                        <div class="mb-3">
+                            <label asp-for="Book.Author.Name" class="form-label">Автор</label>
+                            <input asp-for="Book.Author.Name" class="form-control" />
+                            <span asp-validation-for="Book.Author.Name" class="text-danger"></span>
+                        </div>
 
-	<div>
-		<label>Жанр</label><br />
-		<input asp-for="Book.Genre.Name" />
-	</div>
+                        <div class="mb-3">
+                            <label asp-for="Book.Year" class="form-label">Год издания</label>
+                            <input asp-for="Book.Year" type="number" class="form-control" />
+                            <span asp-validation-for="Book.Year" class="text-danger"></span>
+                        </div>
 
-	<div>
-		<label>Заметки</label><br />
-		<input asp-for="Book.Notes" type="text" />
-	</div>
+                        <div class="mb-3">
+                            <label asp-for="Book.Genre.Name" class="form-label">Жанр</label>
+                            <input asp-for="Book.Genre.Name" class="form-control" />
+                            <span asp-validation-for="Book.Genre.Name" class="text-danger"></span>
+                        </div>
 
-	<div>
-		<label>Дата добавления</label><br />
-		<input asp-for="Book.AddDateTime" type="datetime" />
-	</div>
+                        <div class="mb-3">
+                            <label asp-for="Book.Notes" class="form-label">Заметки</label>
+                            <textarea asp-for="Book.Notes" class="form-control" rows="3"></textarea>
+                        </div>
 
-	<div>
-		<label>Статус</label><br />
-		<select asp-for="Book.Status" asp-items="Html.GetEnumSelectList<BookStatus>()"></select>
-	</div>
+                        <div class="mb-3">
+                            <label asp-for="Book.Status" class="form-label">Статус</label>
+                            <select asp-for="Book.Status" class="form-select" asp-items="Html.GetEnumSelectList<BookStatus>()">
+                                <option value="">Выберите статус</option>
+                            </select>
+                            <span asp-validation-for="Book.Status" class="text-danger"></span>
+                        </div>
 
-	<div>
-		<p>
-		</p>
-	</div>
+                        <div class="mb-3">
+                            <label asp-for="Book.AddDateTime" class="form-label">Дата добавления</label>
+                            <input asp-for="Book.AddDateTime" type="datetime-local" class="form-control" />
+                            <span asp-validation-for="Book.AddDateTime" class="text-danger"></span>
+                        </div>
 
-	<button type="submit">Сохранить</button>
-</form>
+                        <div class="d-flex justify-content-between">
+                            <a asp-page="Index" class="btn btn-secondary">Назад</a>
+                            <button type="submit" class="btn btn-success">Сохранить</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
-<a asp-page="Index">Назад</a>
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
