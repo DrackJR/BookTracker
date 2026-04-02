@@ -1,0 +1,33 @@
+﻿@page
+@model BookTracker.Pages.Author.IndexModel
+@{
+}
+<h1>Список авторов</h1>
+
+<p>
+    <a asp-page="Create">Добавить автора</a>
+</p>
+
+<table border="1" cellpadding="5">
+    <thead>
+        <tr>
+            <th>Имя</th>
+            <th>Биография</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var author in Model.Authors)
+        {
+            <tr>
+                <td>@author.Name</td>
+                <td>@author.Biography</td>
+                <td>
+                    <a asp-page="Details" asp-route-id="@book.Id">Открыть</a>
+                    <a asp-page="Edit" asp-route-id="@book.Id">Изменить</a>
+                    <a asp-page="Delete" asp-route-id="@book.Id">Удалить</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
