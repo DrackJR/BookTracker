@@ -1,0 +1,18 @@
+﻿@page
+@model BookTracker.Pages.Genre.DeleteModel
+@{
+}
+<h1>Удалить жанр</h1>
+
+<h3>Вы уверены?</h3>
+
+<div>
+    <p><strong>@Model.Genre.Name</strong></p>
+</div>
+
+<form method="post">
+    <input type="hidden" asp-for="Genre.Id" />
+    <button type="submit">Удалить</button>
+</form>
+
+<a asp-page="Index">Отмена</a>

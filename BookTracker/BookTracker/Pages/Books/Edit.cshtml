@@ -24,7 +24,9 @@
 
                         <div class="mb-3">
                             <label asp-for="Book.Author.Name" class="form-label">Автор</label>
-                            <input asp-for="Book.Author.Name" class="form-control" />
+                            <select asp-for="Book.Author.Id" class="form-select" asp-items="Model.AuthorList">
+                                <option value="">Выберите автора</option>
+                            </select>
                             <span asp-validation-for="Book.Author.Name" class="text-danger"></span>
                         </div>
 
@@ -37,7 +39,9 @@
 
                         <div class="mb-3">
                             <label asp-for="Book.Genre.Name" class="form-label">Жанр</label>
-                            <input asp-for="Book.Genre.Name" class="form-control" />
+                            <select asp-for="Book.Genre.Id" class="form-select" asp-items="Model.GenreList">
+                                <option value="">Выберите жанр</option>
+                            </select>
                         </div>
 
                         <div class="mb-3">

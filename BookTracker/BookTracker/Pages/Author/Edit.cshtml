@@ -1,0 +1,28 @@
+﻿@page
+@model BookTracker.Pages.Author.EditModel
+@{
+}
+<h1>Редактировать автора</h1>
+
+<form method="post">
+    <input type="hidden" asp-for="Author.Id" />
+
+    <div>
+        <label>Имя</label><br />
+        <input asp-for="Author.Name" type="text" />
+    </div>
+
+    <div>
+        <label>Биография</label><br />
+        <input asp-for="Author.Biografy" type="text" />
+    </div>
+
+    <div>
+        <p>
+        </p>
+    </div>
+
+    <button type="submit">Сохранить</button>
+</form>
+
+<a asp-page="Index">Назад</a>

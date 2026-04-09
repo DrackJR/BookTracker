@@ -1,0 +1,33 @@
+﻿@page
+@model BookTracker.Pages.Genre.IndexModel
+@{
+}
+<h1>Список жанров</h1>
+
+<p>
+    <a asp-page="Create">Добавить жанр</a>
+</p>
+
+<table border="1" cellpadding="5">
+    <thead>
+        <tr>
+            <th>Название</th>
+            <th>Описание</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var genre in Model.Genres)
+        {
+            <tr>
+                <td>@genre.Name</td>
+                <td>@genre.Description</td>
+                <td>
+                    <a asp-page="Details" asp-route-id="@genre.Id">Открыть</a>
+                    <a asp-page="Edit" asp-route-id="@genre.Id">Изменить</a>
+                    <a asp-page="Delete" asp-route-id="@genre.Id">Удалить</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

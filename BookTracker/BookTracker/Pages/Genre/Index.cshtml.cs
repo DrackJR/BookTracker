@@ -1,10 +1,8 @@
+using BookTracker.Data;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using BookTracker.Data;
-using BookTracker.Model;
 
-
-namespace BookTracker.Pages.Author
+namespace BookTracker.Pages.Genre
 {
     public class IndexModel : PageModel
     {
@@ -14,11 +12,11 @@ namespace BookTracker.Pages.Author
         {
             _context = context;
         }
-        public List<Model.Author> Authors { get; set; }
+        public List<Model.Genre> Genres { get; set; }
 
         public void OnGet()
         {
-            Authors = _context.Authors.ToList();
+            Genres = _context.Genres.ToList();
         }
     }
 }
