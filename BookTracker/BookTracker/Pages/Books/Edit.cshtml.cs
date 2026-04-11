@@ -77,7 +77,6 @@ namespace BookTracker.Pages.Books
                 existingBook.Genre = null;
             }
 
-            _context.Books.Update(Book);
             _context.SaveChanges();
 
             return RedirectToPage("Index");
