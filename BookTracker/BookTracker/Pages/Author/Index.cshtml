@@ -1,33 +1,57 @@
 ﻿@page
 @model BookTracker.Pages.Author.IndexModel
 @{
+    ViewData["Title"] = "Список авторов";
 }
-<h1>Список авторов</h1>
 
-<p>
-    <a asp-page="Create">Добавить автора</a>
-</p>
+<div class="container mt-4">
+    <div class="row justify-content-between align-items-center mb-4">
+        <div class="col">
+            <h1 class="h3 mb-0">Список авторов</h1>
+        </div>
+        <div class="col-auto">
+            <a asp-page="Create" class="btn btn-primary">Добавить автора</a>
+        </div>
+    </div>
 
-<table border="1" cellpadding="5">
-    <thead>
-        <tr>
-            <th>Имя</th>
-            <th>Биография</th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
+    <div class="row">
         @foreach (var author in Model.Authors)
         {
-            <tr>
-                <td>@author.Name</td>
-                <td>@author.Biografy</td>
-                <td>
-                    <a asp-page="Details" asp-route-id="@author.Id">Открыть</a>
-                    <a asp-page="Edit" asp-route-id="@author.Id">Изменить</a>
-                    <a asp-page="Delete" asp-route-id="@author.Id">Удалить</a>
-                </td>
-            </tr>
+            <div class="col-md-6 col-lg-4 mb-4">
+                <div class="card shadow-sm h-100">
+                    <div class="card-body">
+                        <h5 class="card-title text-primary">@author.Name</h5>
+
+                        @if (!string.IsNullOrEmpty(author.Biografy))
+                        {
+                            <p class="card-text text-muted small">
+                                @(author.Biografy.Length > 100 ? author.Biografy.Substring(0, 100) + "..." : author.Biografy)
+                            </p>
+                        }
+                        else
+                        {
+                            <p class="card-text text-muted fst-italic small">Нет биографии</p>
+                        }
+
+                        <hr />
+                        <div class="d-flex justify-content-between align-items-center mt-3">
+                            <small class="text-muted">ID: @author.Id</small>
+                            <div class="btn-group btn-group-sm">
+                                <a asp-page="Details" asp-route-id="@author.Id" class="btn btn-outline-primary">Открыть</a>
+                                <a asp-page="Edit" asp-route-id="@author.Id" class="btn btn-outline-secondary">Изменить</a>
+                                <a asp-page="Delete" asp-route-id="@author.Id" class="btn btn-outline-danger">Удалить</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         }
-    </tbody>
-</table>
+    </div>
+
+    @if (!Model.Authors.Any())
+    {
+        <div class="alert alert-info text-center">
+            Список авторов пуст. Добавьте первого автора!
+        </div>
+    }
+</div>

@@ -1,14 +1,42 @@
 ﻿@page
 @model BookTracker.Pages.Genre.DetailsModel
 @{
+    ViewData["Title"] = "Информация о жанре";
 }
-<h1>Информация о жанре</h1>
 
-<div>
-    <p><strong>Название:</strong> @Model.Genre.Name</p>
-    <p><strong>Описание:</strong> @Model.Genre.Description</p>
+<div class="container mt-4">
+    <div class="row justify-content-center">
+        <div class="col-lg-6">
+            <div class="card shadow-sm">
+                <div class="card-header bg-primary text-white">
+                    <h4 class="mb-0">Информация о жанре</h4>
+                </div>
+                <div class="card-body">
+                    <dl class="row">
+                        <dt class="col-sm-3">Название</dt>
+                        <dd class="col-sm-9">@Model.Genre.Name</dd>
+
+                        @if (!string.IsNullOrEmpty(Model.Genre.Description))
+                        {
+                            <dt class="col-sm-3">Описание</dt>
+                            <dd class="col-sm-9">@Model.Genre.Description</dd>
+                        }
+                        else
+                        {
+                            <dt class="col-sm-3">Описание</dt>
+                            <dd class="col-sm-9 text-muted fst-italic">Описание не указано</dd>
+                        }
+                    </dl>
+
+                    <div class="d-flex justify-content-between mt-3">
+                        <a asp-page="Index" class="btn btn-secondary">Назад к списку</a>
+                        <div>
+                            <a asp-page="Edit" asp-route-id="@Model.Genre.Id" class="btn btn-primary">Редактировать</a>
+                            <a asp-page="Delete" asp-route-id="@Model.Genre.Id" class="btn btn-danger">Удалить</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
-
-<p>
-    <a asp-page="Index">Назад к списку</a>
-</p>

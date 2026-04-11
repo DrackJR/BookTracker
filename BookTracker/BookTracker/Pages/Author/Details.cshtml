@@ -1,14 +1,42 @@
 ﻿@page
 @model BookTracker.Pages.Author.DetailsModel
 @{
+    ViewData["Title"] = "Информация об авторе";
 }
-<h1>Информация об авторе</h1>
 
-<div>
-    <p><strong>Имя:</strong> @Model.Author.Name</p>
-    <p><strong>Биография:</strong> @Model.Author.Biografy</p>
+<div class="container mt-4">
+    <div class="row justify-content-center">
+        <div class="col-lg-6">
+            <div class="card shadow-sm">
+                <div class="card-header bg-primary text-white">
+                    <h4 class="mb-0">Информация об авторе</h4>
+                </div>
+                <div class="card-body">
+                    <dl class="row">
+                        <dt class="col-sm-3">Имя автора</dt>
+                        <dd class="col-sm-9">@Model.Author.Name</dd>
+
+                        @if (!string.IsNullOrEmpty(Model.Author.Biografy))
+                        {
+                            <dt class="col-sm-3">Биография</dt>
+                            <dd class="col-sm-9">@Model.Author.Biografy</dd>
+                        }
+                        else
+                        {
+                            <dt class="col-sm-3">Биография</dt>
+                            <dd class="col-sm-9 text-muted fst-italic">Биография не указана</dd>
+                        }
+                    </dl>
+
+                    <div class="d-flex justify-content-between mt-3">
+                        <a asp-page="Index" class="btn btn-secondary">Назад к списку</a>
+                        <div>
+                            <a asp-page="Edit" asp-route-id="@Model.Author.Id" class="btn btn-primary">Редактировать</a>
+                            <a asp-page="Delete" asp-route-id="@Model.Author.Id" class="btn btn-danger">Удалить</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
-
-<p>
-    <a asp-page="Index">Назад к списку</a>
-</p>

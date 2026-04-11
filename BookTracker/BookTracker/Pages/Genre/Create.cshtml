@@ -1,27 +1,41 @@
 ﻿@page
 @model BookTracker.Pages.Genre.CreateModel
 @{
+    ViewData["Title"] = "Добавить жанр";
 }
-<h1>Добавить жанр</h1>
-<form method="post">
-	<div>
-		<label>Название</label><br />
-		<input asp-for="Genre.Name" />
-		<span asp-validation-for="Genre.Name"></span>
-	</div>
 
-	<div>
-		<label>Описание</label><br />
-		<input asp-for="Genre.Description" />
-		<span asp-validation-for="Genre.Description"></span>
-	</div>
+<div class="container mt-4">
+    <div class="row justify-content-center">
+        <div class="col-lg-6">
+            <div class="card shadow-sm">
+                <div class="card-header bg-primary text-white">
+                    <h4 class="mb-0">Добавить жанр</h4>
+                </div>
+                <div class="card-body">
+                    <form method="post">
+                        <div class="mb-3">
+                            <label asp-for="Genre.Name" class="form-label">Название жанра</label>
+                            <input asp-for="Genre.Name" class="form-control" />
+                            <span asp-validation-for="Genre.Name" class="text-danger"></span>
+                        </div>
 
-	<div>
-		<p>
-		</p>
-	</div>
+                        <div class="mb-3">
+                            <label asp-for="Genre.Description" class="form-label">Описание</label>
+                            <textarea asp-for="Genre.Description" class="form-control" rows="4"></textarea>
+                            <span asp-validation-for="Genre.Description" class="text-danger"></span>
+                        </div>
 
-	<button type="submit">Сохранить</button>
-</form>
+                        <div class="d-flex justify-content-between">
+                            <a asp-page="Index" class="btn btn-secondary">Назад</a>
+                            <button type="submit" class="btn btn-success">Сохранить</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
-<a asp-page="Index">Назад</a>
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

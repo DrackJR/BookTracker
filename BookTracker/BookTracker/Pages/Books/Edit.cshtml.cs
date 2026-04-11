@@ -41,7 +41,41 @@ namespace BookTracker.Pages.Books
         public IActionResult OnPost()
         {
             if (!ModelState.IsValid)
-                return Page();                    
+            {
+                LoadSelectLists();
+                return Page();
+            }
+            var existingBook = _context.Books
+               .Include(b => b.Author)
+               .Include(b => b.Genre)
+               .FirstOrDefault(b => b.Id == Book.Id);
+
+            if (existingBook == null)
+                return NotFound();
+
+            existingBook.Title = Book.Title;
+            existingBook.Year = Book.Year;
+            existingBook.Notes = Book.Notes;
+            existingBook.Status = Book.Status;
+            existingBook.AddDateTime = Book.AddDateTime;
+
+            if (Book.Author != null && Book.Author.Id > 0)
+            {
+                existingBook.Author = _context.Authors.Find(Book.Author.Id);
+            }
+            else
+            {
+                existingBook.Author = null;
+            }
+
+            if (Book.Genre != null && Book.Genre.Id > 0)
+            {
+                existingBook.Genre = _context.Genres.Find(Book.Genre.Id);
+            }
+            else
+            {
+                existingBook.Genre = null;
+            }
 
             _context.Books.Update(Book);
             _context.SaveChanges();

@@ -1,26 +1,40 @@
 ﻿@page
 @model BookTracker.Pages.Author.CreateModel
 @{
+    ViewData["Title"] = "Добавить автора";
 }
-<h1>Добавить автора</h1>
-<form method="post">
-	<div>
-		<label>Имя</label><br />
-		<input asp-for="Author.Name" />
-		<span asp-validation-for="Author.Name"></span>
-	</div>
 
-	<div>
-		<label>Биография</label><br />
-		<input asp-for="Author.Biografy" />
-	</div>
+<div class="container mt-4">
+    <div class="row justify-content-center">
+        <div class="col-lg-6">
+            <div class="card shadow-sm">
+                <div class="card-header bg-primary text-white">
+                    <h4 class="mb-0">Добавить автора</h4>
+                </div>
+                <div class="card-body">
+                    <form method="post">
+                        <div class="mb-3">
+                            <label asp-for="Author.Name" class="form-label">Имя автора</label>
+                            <input asp-for="Author.Name" class="form-control" />
+                            <span asp-validation-for="Author.Name" class="text-danger"></span>
+                        </div>
 
-	<div>
-		<p>
-		</p>
-	</div>
+                        <div class="mb-3">
+                            <label asp-for="Author.Biografy" class="form-label">Биография</label>
+                            <textarea asp-for="Author.Biografy" class="form-control" rows="5"></textarea>
+                        </div>
 
-	<button type="submit">Сохранить</button>
-</form>
+                        <div class="d-flex justify-content-between">
+                            <a asp-page="Index" class="btn btn-secondary">Назад</a>
+                            <button type="submit" class="btn btn-success">Сохранить</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
-<a asp-page="Index">Назад</a>
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

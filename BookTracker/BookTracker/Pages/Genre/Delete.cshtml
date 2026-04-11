@@ -1,18 +1,42 @@
 ﻿@page
 @model BookTracker.Pages.Genre.DeleteModel
 @{
+    ViewData["Title"] = "Удалить жанр";
 }
-<h1>Удалить жанр</h1>
 
-<h3>Вы уверены?</h3>
+<div class="container mt-4">
+    <div class="row justify-content-center">
+        <div class="col-lg-6">
+            <div class="card shadow-sm">
+                <div class="card-header bg-danger text-white">
+                    <h4 class="mb-0">Удалить жанр</h4>
+                </div>
+                <div class="card-body">
+                    <div class="alert alert-warning mb-4">
+                        Вы действительно хотите удалить этот жанр?
+                    </div>
 
-<div>
-    <p><strong>@Model.Genre.Name</strong></p>
+                    <dl class="row">
+                        <dt class="col-sm-3">Название</dt>
+                        <dd class="col-sm-9">@Model.Genre.Name</dd>
+
+                        @if (!string.IsNullOrEmpty(Model.Genre.Description))
+                        {
+                            <dt class="col-sm-3">Описание</dt>
+                            <dd class="col-sm-9">@Model.Genre.Description</dd>
+                        }
+                    </dl>
+
+                    <form method="post">
+                        <input type="hidden" asp-for="Genre.Id" />
+
+                        <div class="d-flex justify-content-between">
+                            <a asp-page="Index" class="btn btn-secondary">Назад</a>
+                            <button type="submit" class="btn btn-danger">Удалить</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
-
-<form method="post">
-    <input type="hidden" asp-for="Genre.Id" />
-    <button type="submit">Удалить</button>
-</form>
-
-<a asp-page="Index">Отмена</a>
