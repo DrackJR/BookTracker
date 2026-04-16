@@ -2,9 +2,8 @@ using BookTracker.Data;
 using BookTracker.Model;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.EntityFrameworkCore;
 
-namespace BookTracker.Pages.Books
+namespace BookTracker.Pages.Author
 {
     public class DeleteModel : PageModel
     {
@@ -16,16 +15,13 @@ namespace BookTracker.Pages.Books
         }
 
         [BindProperty]
-        public Book Book { get; set; }
+        public Model.Author Author { get; set; }
 
         public IActionResult OnGet(int id)
         {
-            Book = _context.Books.Where(c => c.Id == id)
-                .Include(b => b.Author)
-                .Include(b => b.Genre)
-                .FirstOrDefault();
+            Author = _context.Authors.Find(id);
 
-            if (Book == null)
+            if (Author == null)
                 return NotFound();
 
             return Page();
@@ -33,11 +29,11 @@ namespace BookTracker.Pages.Books
 
         public IActionResult OnPost()
         {
-            var book = _context.Books.Find(Book.Id);
+            var author = _context.Authors.Find(Author.Id);
 
-            if (book != null)
+            if (author != null)
             {
-                _context.Books.Remove(book);
+                _context.Authors.Remove(author);
                 _context.SaveChanges();
             }
 

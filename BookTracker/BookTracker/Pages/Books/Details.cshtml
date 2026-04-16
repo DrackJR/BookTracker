@@ -1,19 +1,61 @@
 ﻿@page
+@using BookTracker.Model
 @model BookTracker.Pages.Books.DetailsModel
 @{
+    ViewData["Title"] = "Информация о книге";
 }
-<h1>Информация о книге</h1>
 
-<div>
-    <p><strong>Название:</strong> @Model.Book.Title</p>
-    <p><strong>Автор:</strong> @Model.Book.Author.Name</p>
-    <p><strong>Год:</strong> @Model.Book.Year</p>
-    <p><strong>:Жанр:</strong> @Model.Book.Genre.Name</p>
-    <p><strong>:Заметки:</strong> @Model.Book.Notes</p>
-    <p><strong>:Дата добавления:</strong> @Model.Book.AddDateTime</p>
-    <p><strong>:Статус:</strong> @Model.Book.Status</p>
+<div class="container mt-4">
+    <div class="row justify-content-center">
+        <div class="col-lg-6">
+            <div class="card shadow-sm">
+                <div class="card-header bg-primary text-white">
+                    <h4 class="mb-0">Информация о книге</h4>
+                </div>
+                <div class="card-body">
+                    <dl class="row">
+                        <dt class="col-sm-3">Название</dt>
+                        <dd class="col-sm-9">@Model.Book.Title</dd>
+
+                        <dt class="col-sm-3">Автор</dt>
+                        <dd class="col-sm-9">@Model.Book.Author?.Name</dd>
+
+                        <dt class="col-sm-3">Год издания</dt>
+                        <dd class="col-sm-9">@Model.Book.Year</dd>
+
+                        <dt class="col-sm-3">Жанр</dt>
+                        <dd class="col-sm-9">@(string.IsNullOrEmpty(Model.Book.Genre?.Name) ? "—" : Model.Book.Genre.Name)</dd>
+
+                        <dt class="col-sm-3">Заметки</dt>
+                        <dd class="col-sm-9">@(string.IsNullOrEmpty(Model.Book.Notes) ? "—" : Model.Book.Notes)</dd>
+
+                        <dt class="col-sm-3">Дата добавления</dt>
+                        <dd class="col-sm-9">@Model.Book.AddDateTime.ToString("dd.MM.yyyy HH:mm")</dd>
+
+                        <dt class="col-sm-3">Статус</dt>
+                        <dd class="col-sm-9">
+                            @{
+                                var statusClass = Model.Book.Status switch
+                                {
+                                    BookStatus.Прочитано => "text-success",
+                                    BookStatus.Читаю => "text-primary",
+                                    BookStatus.В_планах => "text-info",
+                                    _ => "text-secondary"
+                                };
+                            }
+                            <span class="@statusClass fw-semibold">@Model.Book.Status</span>
+                        </dd>
+                    </dl>
+
+                    <div class="d-flex justify-content-between mt-3">
+                        <a asp-page="Index" class="btn btn-secondary">Назад</a>
+                        <div>
+                            <a asp-page="Edit" asp-route-id="@Model.Book.Id" class="btn btn-primary">Редактировать</a>
+                            <a asp-page="Delete" asp-route-id="@Model.Book.Id" class="btn btn-danger">Удалить</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
-
-<p>
-    <a asp-page="Index">Назад к списку</a>
-</p>

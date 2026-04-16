@@ -1,43 +1,55 @@
 ﻿@page
 @model BookTracker.Pages.Books.IndexModel
 @{
+    ViewData["Title"] = "Список книг";
 }
-<h1>Список книг</h1>
 
-<p>
-    <a asp-page="Create">Добавить новую книгу</a>
-</p>
-
-<table border="1" cellpadding="5">
-    <thead>
-        <tr>
-            <th>Название</th>
-            <th>Автор</th>
-            <th>Год</th>
-            <th>Жанр</th>
-            <th>Заметки</th>
-            <th>Дата добавления</th>
-            <th>Статус</th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var book in Model.Books)
-        {
-            <tr>
-                <td>@book.Title</td>
-                <td>@book.Author.Name</td>
-                <td>@book.Year</td>
-                <td>@book.Genre.Name</td>
-                <td>@book.Notes</td>
-                <td>@book.AddDateTime.ToString()</td>
-                <td>@book.Status</td> 
-                <td>
-                    <a asp-page="Details" asp-route-id="@book.Id">Открыть</a>
-                    <a asp-page="Edit" asp-route-id="@book.Id">Изменить</a>
-                    <a asp-page="Delete" asp-route-id="@book.Id">Удалить</a>
-                </td>
-            </tr>
-        }
-    </tbody>
-</table>
+<div class="container mt-4">
+    <div class="row justify-content-center">
+        <div class="col-lg-11">
+            <div class="card shadow-sm">
+                <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
+                    <h4 class="mb-0">Список книг</h4>
+                    <a asp-page="Create" class="btn btn-light btn-sm">Добавить книгу</a>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-hover mb-0">
+                            <thead class="table-light">
+                                <tr>
+                                    <th>Название</th>
+                                    <th>Автор</th>
+                                    <th>Год</th>
+                                    <th>Жанр</th>
+                                    <th>Заметки</th>
+                                    <th>Дата добавления</th>
+                                    <th>Статус</th>
+                                    <th>Действия</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var book in Model.Books)
+                                {
+                                    <tr>
+                                        <td>@book.Title</td>
+                                        <td>@book.Author?.Name</td>
+                                        <td>@book.Year</td>
+                                        <td>@book.Genre?.Name</td>
+                                        <td>@(book.Notes?.Length > 30 ? book.Notes.Substring(0, 30) + "..." : book.Notes)</td>
+                                        <td>@book.AddDateTime.ToString("dd.MM.yyyy")</td>
+                                        <td>@book.Status</td>
+                                        <td>
+                                            <a asp-page="Details" asp-route-id="@book.Id" class="btn btn-sm btn-outline-primary">Открыть</a>
+                                            <a asp-page="Edit" asp-route-id="@book.Id" class="btn btn-sm btn-outline-secondary">Изменить</a>
+                                            <a asp-page="Delete" asp-route-id="@book.Id" class="btn btn-sm btn-outline-danger">Удалить</a>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

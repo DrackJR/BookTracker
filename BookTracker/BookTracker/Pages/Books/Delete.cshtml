@@ -1,19 +1,54 @@
 ﻿@page
 @model BookTracker.Pages.Books.DeleteModel
 @{
+    ViewData["Title"] = "Удалить книгу";
 }
-<h1>Удалить книгу</h1>
 
-<h3>Вы уверены?</h3>
+<div class="container mt-4">
+    <div class="row justify-content-center">
+        <div class="col-lg-6">
+            <div class="card shadow-sm">
+                <div class="card-header bg-danger text-white">
+                    <h4 class="mb-0">Удалить книгу</h4>
+                </div>
+                <div class="card-body">
+                    <div class="alert alert-warning mb-4">
+                        Вы действительно хотите удалить эту книгу?
+                    </div>
 
-<div>
-    <p><strong>@Model.Book.Title</strong></p>
-    <p>@Model.Book.Author</p>
+                    <dl class="row">
+                        <dt class="col-sm-3">Название</dt>
+                        <dd class="col-sm-9">@Model.Book.Title</dd>
+
+                        <dt class="col-sm-3">Автор</dt>
+                        <dd class="col-sm-9">@Model.Book.Author?.Name</dd>
+
+                        <dt class="col-sm-3">Год издания</dt>
+                        <dd class="col-sm-9">@Model.Book.Year</dd>
+
+                        <dt class="col-sm-3">Жанр</dt>
+                        <dd class="col-sm-9">@(string.IsNullOrEmpty(Model.Book.Genre?.Name) ? "—" : Model.Book.Genre.Name)</dd>
+
+                        <dt class="col-sm-3">Заметки</dt>
+                        <dd class="col-sm-9">@(string.IsNullOrEmpty(Model.Book.Notes) ? "—" : Model.Book.Notes)</dd>
+
+                        <dt class="col-sm-3">Дата добавления</dt>
+                        <dd class="col-sm-9">@Model.Book.AddDateTime.ToString("dd.MM.yyyy HH:mm")</dd>
+
+                        <dt class="col-sm-3">Статус</dt>
+                        <dd class="col-sm-9">@Model.Book.Status</dd>
+                    </dl>
+
+                    <form method="post">
+                        <input type="hidden" asp-for="Book.Id" />
+
+                        <div class="d-flex justify-content-between">
+                            <a asp-page="Index" class="btn btn-secondary">Назад</a>
+                            <button type="submit" class="btn btn-danger">Удалить</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
-
-<form method="post">
-    <input type="hidden" asp-for="Book.Id" />
-    <button type="submit">Удалить</button>
-</form>
-
-<a asp-page="Index">Отмена</a>
