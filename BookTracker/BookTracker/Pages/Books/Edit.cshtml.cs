@@ -42,44 +42,24 @@ namespace BookTracker.Pages.Books
         {
             if (!ModelState.IsValid)
             {
-                LoadSelectLists();
+                AuthorList = new SelectList(_context.Authors.ToList(), "Id", "Name");
+                GenreList = new SelectList(_context.Genres.ToList(), "Id", "Name");
                 return Page();
             }
-            var existingBook = _context.Books
-               .Include(b => b.Author)
-               .Include(b => b.Genre)
-               .FirstOrDefault(b => b.Id == Book.Id);
 
-            if (existingBook == null)
-                return NotFound();
+            _context.Attach(Book).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
 
-            existingBook.Title = Book.Title;
-            existingBook.Year = Book.Year;
-            existingBook.Notes = Book.Notes;
-            existingBook.Status = Book.Status;
-            existingBook.AddDateTime = Book.AddDateTime;
-
-            if (Book.Author != null && Book.Author.Id > 0)
+            try
             {
-                existingBook.Author = _context.Authors.Find(Book.Author.Id);
+                _context.SaveChanges();
             }
-            else
+            catch (DbUpdateConcurrencyException)
             {
-                existingBook.Author = null;
+                if (!_context.Books.Any(e => e.Id == Book.Id)) return NotFound();
+                else throw;
             }
 
-            if (Book.Genre != null && Book.Genre.Id > 0)
-            {
-                existingBook.Genre = _context.Genres.Find(Book.Genre.Id);
-            }
-            else
-            {
-                existingBook.Genre = null;
-            }
-
-            _context.SaveChanges();
-
-            return RedirectToPage("Index");
+            return RedirectToPage("./Index");
         }
 
 

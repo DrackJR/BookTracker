@@ -1,13 +1,20 @@
-﻿namespace BookTracker.Model
+﻿using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
+using System.ComponentModel.DataAnnotations;
+
+namespace BookTracker.Model
 {
     public class Book : EFModel
     {
-        public string Title { get; set; }
+        //public string Title { get; set; }
+        [Required(ErrorMessage = "Выберите автора.")]
         public int AuthorId { get; set; }
-        public Author Author { get; set; } = new Author();
+        [ValidateNever]
+        public Author? Author { get; set; }
         public int Year { get; set; }
+        [Required(ErrorMessage = "Выберите жанр.")]
         public int GenreId { get; set; }
-        public Genre Genre { get; set; } = new Genre();
+        [ValidateNever]
+        public Genre? Genre { get; set; }
         public string? Notes {  get; set; }
         public DateTime AddDateTime {  get; set; }
         public BookStatus Status { get; set; }
