@@ -16,9 +16,9 @@ namespace BookTracker.Pages
             _context = context;
         }
 
-        public void OnGet()
+        public IActionResult OnGet()
         {
-
+            return RedirectToPage("/Books/Index");
         }
     }
 }
