@@ -5,6 +5,8 @@ VisualStudioVersion = 17.14.36414.22
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookTracker", "BookTracker\BookTracker.csproj", "{AAEF1888-D264-465F-9DBC-3E92790C14B6}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookTracker.Test", "BookTracker.Test\BookTracker.Test.csproj", "{8F295A2D-925E-4881-A36F-CDC5CB67D367}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{AAEF1888-D264-465F-9DBC-3E92790C14B6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AAEF1888-D264-465F-9DBC-3E92790C14B6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AAEF1888-D264-465F-9DBC-3E92790C14B6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8F295A2D-925E-4881-A36F-CDC5CB67D367}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8F295A2D-925E-4881-A36F-CDC5CB67D367}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8F295A2D-925E-4881-A36F-CDC5CB67D367}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8F295A2D-925E-4881-A36F-CDC5CB67D367}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
