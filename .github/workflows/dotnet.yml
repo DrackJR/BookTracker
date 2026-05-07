@@ -21,8 +21,8 @@ jobs:
       with:
         dotnet-version: 9.0.x
     - name: Restore dependencies
-      run: dotnet restore BookTracker.sln
+      run: dotnet restore BookTracker/BookTracker/BookTracker.csproj
     - name: Build
-      run: dotnet build --no-restore
+      run: dotnet build BookTracker/BookTracker/BookTracker.csproj --no-restore
     - name: Test
-      run: dotnet test --no-build --verbosity normal
+      run: dotnet test BookTracker/BookTracker.Test/BookTracker.Test.csproj --no-build --verbosity normal
