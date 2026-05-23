@@ -19,7 +19,20 @@
 
                 <div class="card h-100 shadow-sm">
 
-                    <div class="card-body">
+                    <div class="card-body text-center">
+                        @if (user.Avatar != null && user.Avatar.Length > 0)
+                        {
+                            <img src="data:image/jpeg;base64,@Convert.ToBase64String(user.Avatar)"
+                                 style="width: 80px; height: 80px; border-radius: 50%; object-fit: cover;" />
+                        }
+                        else
+                        {
+                            <div style="width: 80px; height: 80px; border-radius: 50%; background-color: #6c757d; margin: 0 auto; line-height: 80px; color: white; font-size: 32px;">
+                                👤
+                            </div>
+                        }
+                        <p class="text-muted">@user.Email</p>
+                        <span class="badge bg-secondary">@user.Role</span>
 
                         <h5 class="card-title text-truncate">
                             @user.Email

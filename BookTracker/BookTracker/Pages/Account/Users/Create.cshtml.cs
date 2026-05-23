@@ -16,6 +16,7 @@ namespace BookTracker.Pages.Account.Users
 
         public void OnGet()
         {
+
         }
 
         public async Task<IActionResult> OnPostAsync()

@@ -31,10 +31,10 @@
                                 @foreach (var book in Model.Books)
                                 {
                                     <tr>
-                                        <td>@book.Name</td>
-                                        <td>@book.Author?.Name</td>
+                                        <td>@book.Title</td>
+                                        <td>@book.Author?.Title</td>
                                         <td>@book.Year</td>
-                                        <td>@book.Genre?.Name</td>
+                                        <td>@book.Genre?.Title</td>
                                         <td>@(book.Notes?.Length > 30 ? book.Notes.Substring(0, 30) + "..." : book.Notes)</td>
                                         <td>@book.AddDateTime.ToString("dd.MM.yyyy")</td>
                                         <td>@book.Status</td>

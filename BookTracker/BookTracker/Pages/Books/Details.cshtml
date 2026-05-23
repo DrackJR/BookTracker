@@ -15,16 +15,16 @@
                 <div class="card-body">
                     <dl class="row">
                         <dt class="col-sm-3">Название</dt>
-                        <dd class="col-sm-9">@Model.Book.Name</dd>
+                        <dd class="col-sm-9">@Model.Book.Title</dd>
 
                         <dt class="col-sm-3">Автор</dt>
-                        <dd class="col-sm-9">@Model.Book.Author?.Name</dd>
+                        <dd class="col-sm-9">@Model.Book.Author?.Title</dd>
 
                         <dt class="col-sm-3">Год издания</dt>
                         <dd class="col-sm-9">@Model.Book.Year</dd>
 
                         <dt class="col-sm-3">Жанр</dt>
-                        <dd class="col-sm-9">@(string.IsNullOrEmpty(Model.Book.Genre?.Name) ? "—" : Model.Book.Genre.Name)</dd>
+                        <dd class="col-sm-9">@(string.IsNullOrEmpty(Model.Book.Genre?.Title) ? "—" : Model.Book.Genre.Title)</dd>
 
                         <dt class="col-sm-3">Заметки</dt>
                         <dd class="col-sm-9">@(string.IsNullOrEmpty(Model.Book.Notes) ? "—" : Model.Book.Notes)</dd>

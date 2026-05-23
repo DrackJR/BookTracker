@@ -20,6 +20,9 @@ namespace BookTracker.Pages.Account.Users
         [BindProperty]
         public AuthUser User { get; set; }
 
+        [BindProperty]
+        public IFormFile? AvatarFile { get; set; }
+
         public async Task<IActionResult> OnGetAsync(int id)
         {
             User = await _context.AuthUsers.FindAsync(id);
@@ -34,6 +37,21 @@ namespace BookTracker.Pages.Account.Users
         {
             if (!ModelState.IsValid)
                 return Page();
+
+            if (AvatarFile != null)
+            {
+                if (AvatarFile.Length > 2 * 1024 * 1024)
+                {
+                    ModelState.AddModelError("", "File too large");
+                    return Page();
+                }
+
+                using (var ms = new MemoryStream())
+                {
+                    await AvatarFile.CopyToAsync(ms);
+                    User.Avatar = ms.ToArray();
+                }
+            }
 
             _context.Attach(User).State = EntityState.Modified;
 
