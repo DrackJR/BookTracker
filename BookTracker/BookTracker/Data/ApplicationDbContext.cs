@@ -16,6 +16,5 @@ namespace BookTracker.Data
         public DbSet<Author> Authors { get; set; }
         public DbSet<Genre> Genres { get; set; }
         public DbSet<AuthUser> AuthUsers { get; set; }
-        public DbSet<Reader> Readers { get; set; }
     }
 }
