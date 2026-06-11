@@ -34,22 +34,11 @@ namespace BookTracker.Pages.Books
         {
             if (!ModelState.IsValid)
             {
-                var authors = _context.Authors.ToList();
-                var genres = _context.Genres.ToList();
-
-                AuthorList = new SelectList(authors, "Id", "Name");
-                GenreList = new SelectList(genres, "Id", "Name");
+                AuthorList = new SelectList(_context.Authors.ToList(), "Id", "Name");
+                GenreList = new SelectList(_context.Genres.ToList(), "Id", "Name");
                 return Page();
             }
-            if (Book.Author != null && Book.Author.Id > 0)
-            {
-                Book.Author = _context.Authors.Find(Book.Author.Id);
-            }
 
-            if (Book.Genre != null && Book.Genre.Id > 0)
-            {
-                Book.Genre = _context.Genres.Find(Book.Genre.Id);
-            }
             _context.Books.Add(Book);
             _context.SaveChanges();
 
