@@ -5,7 +5,8 @@ namespace BookTracker.Model
 {
     public class Book : EFModel
     {
-        //public string Title { get; set; }
+        [Required(ErrorMessage = "Наименование обязательно.")]
+        public string Title { get; set; }
         [Required(ErrorMessage = "Выберите автора.")]
         public int AuthorId { get; set; }
         [ValidateNever]

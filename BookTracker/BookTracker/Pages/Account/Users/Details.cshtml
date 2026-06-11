@@ -1,0 +1,42 @@
+﻿@page
+@model BookTracker.Pages.Account.Users.DetailsModel
+@{
+}
+<div class="container mt-4">
+
+    <h2>User Details</h2>
+
+    <div class="card">
+
+        <div class="card-body">
+            @if (Model.User.Avatar != null && Model.User.Avatar.Length > 0)
+            {
+                <img src="data:image/jpeg;base64,@Convert.ToBase64String(Model.User.Avatar)"
+                     style="width: 150px; height: 150px; border-radius: 50%; object-fit: cover;" />
+            }
+            else
+            {
+                <div style="width: 150px; height: 150px; border-radius: 50%; background-color: #6c757d; margin: 0 auto; line-height: 150px; color: white; font-size: 64px;">
+                    👤
+                </div>
+            }
+
+            <p><b>Email:</b> @Model.User.Email</p>
+            <p><b>Role:</b> @Model.User.Role</p>
+
+        </div>
+
+    </div>
+
+    <br>
+
+    <a asp-page="Edit" asp-route-id="@Model.User.Id"
+       class="btn btn-warning">
+        Edit
+    </a>
+
+    <a asp-page="Index" class="btn btn-secondary">
+        Back
+    </a>
+
+</div>
