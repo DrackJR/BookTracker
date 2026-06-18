@@ -1,5 +1,6 @@
-using Microsoft.AspNetCore.Authentication.Cookies;
 using BookTracker.Data;
+using BookTracker.Hubs;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -19,6 +20,8 @@ builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationSc
         options.Cookie.Name = "BookTrackerCookie";
         options.ExpireTimeSpan = TimeSpan.FromHours(1); // Срок действия
     });
+
+builder.Services.AddSignalR();
 
 builder.Services.AddAuthorization();
 
@@ -42,5 +45,8 @@ app.UseAuthorization();
 app.MapStaticAssets();
 app.MapRazorPages()
    .WithStaticAssets();
+
+app.MapHub<BookHub>("/bookHub");
+app.MapHub<ChatHub>("/chatHub");
 
 app.Run();

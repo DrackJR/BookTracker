@@ -1,8 +1,10 @@
 using BookTracker.Data;
+using BookTracker.Hubs;
 using BookTracker.Model;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.AspNetCore.SignalR;
 using Microsoft.EntityFrameworkCore;
 
 namespace BookTracker.Pages.Books
@@ -10,14 +12,16 @@ namespace BookTracker.Pages.Books
     public class EditModel : PageModel
     {
         private readonly ApplicationDbContext _context;
+        private readonly IHubContext<BookHub> _hubContext;
 
-        public EditModel(ApplicationDbContext context)
+        public EditModel(ApplicationDbContext context, IHubContext<BookHub> hubContext)
         {
             _context = context;
+            _hubContext = hubContext;
         }
 
         [BindProperty]
-        public Book Book { get; set; }
+        public Book? Book { get; set; }
 
         public SelectList AuthorList { get; set; }
         public SelectList GenreList { get; set; }
@@ -58,6 +62,9 @@ namespace BookTracker.Pages.Books
                 if (!_context.Books.Any(e => e.Id == Book.Id)) return NotFound();
                 else throw;
             }
+
+            // Отправляем обновление всем клиентам
+            _hubContext.Clients.All.SendAsync("BookUpdated", Book);
 
             return RedirectToPage("./Index");
         }
