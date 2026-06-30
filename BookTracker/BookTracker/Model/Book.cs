@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 
 namespace BookTracker.Model
 {
@@ -8,6 +9,7 @@ namespace BookTracker.Model
         [Required(ErrorMessage = "Выберите автора.")]
         public int AuthorId { get; set; }
         [ValidateNever]
+        [JsonIgnore]
         public Author? Author { get; set; }
         [Required(ErrorMessage = "Требуется год выпуска.")]
         [Range(1000, 2100, ErrorMessage = "Год должен быть между 1000 и 2100.")]
@@ -15,6 +17,7 @@ namespace BookTracker.Model
         [Required(ErrorMessage = "Выберите жанр.")]
         public int GenreId { get; set; }
         [ValidateNever]
+        [JsonIgnore]
         public Genre? Genre { get; set; }
         public string? Notes {  get; set; }
         [Required(ErrorMessage = "Требуется дата.")]

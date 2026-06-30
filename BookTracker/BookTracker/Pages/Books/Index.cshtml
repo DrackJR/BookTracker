@@ -53,3 +53,54 @@
         </div>
     </div>
 </div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/6.0.1/signalr.js"></script>
+<!-- Подключение SignalR для обновления карточек книг в реальном времени -->
+<script>
+    // Создаём подключение к хабу BookHub
+    const connection = new signalR.HubConnectionBuilder()
+        .withUrl("/bookHub") // Путь к хабу на сервере
+        .build();
+
+    // Слушаем событие "BookUpdated", отправляемое сервером
+    connection.on("BookUpdated", function (book) {
+        // Ищем существующую карточку по id
+        const existingCard = document.getElementById("book-" + book.id);
+
+        // HTML для новой/обновлённой карточки
+        const html = `
+            <div class="card h-100 shadow-sm" id="book-${book.id}">
+                <div class="card-body">
+                    <h5 class="card-title text-truncate">📚 ${book.Name}</h5>
+
+                    <p class="card-text mb-1">Автор: <span class="badge bg-secondary">${book.Author?.Name}</span></p>
+                    <p class="card-text mb-2">Год: <span class="badge bg-info">${book.year}</span></p>
+                     <p class="card-text mb-1">Жанр: <span class="badge bg-secondary">${book.Genre?.Name}</span></p>
+                    <p class="card-text mb-2">Заметки: <span class="badge bg-info">${book.notes}</span></p>
+                     <p class="card-text mb-1">Дата добавления: <span class="badge bg-secondary">${book.AddDateTime}</span></p>
+                    <p class="card-text mb-2">Статус: <span class="badge bg-info">${book.Status}</span></p>
+                    <div class="d-flex justify-content-between">
+                        <a href="/Books/Details?id=${book.id}" class="btn btn-sm btn-info">Открыть</a>
+                        <a href="/Books/Edit?id=${book.id}" class="btn btn-sm btn-warning">Изменить</a>
+                        <a href="/Books/Delete?id=${book.id}" class="btn btn-sm btn-danger">Удалить</a>
+                    </div>
+                </div>
+            </div>
+        `;
+
+        if (existingCard) {
+            // Если карточка уже есть — заменяем старую на новую
+            existingCard.outerHTML = html;
+        } else {
+            // Если карточка новая — создаём div.col и добавляем в контейнер
+            const container = document.querySelector(".row");
+            const wrapper = document.createElement("div");
+            wrapper.className = "col-sm-6 col-md-4 col-lg-3";
+            wrapper.innerHTML = html;
+            container.appendChild(wrapper);
+        }
+    });
+
+    // Запуск подключения
+    connection.start().catch(err => console.error(err.toString()));
+</script>

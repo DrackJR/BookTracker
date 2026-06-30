@@ -16,7 +16,7 @@ namespace BookTracker.Pages.Books
         }
 
         [BindProperty]
-        public Book Book { get; set; }
+        public Book? Book { get; set; }
 
         public IActionResult OnGet(int id)
         {
